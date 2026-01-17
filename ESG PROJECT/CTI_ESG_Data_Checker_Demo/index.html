@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>CTI Sustainability Data Checker Demo</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <h1>CTI Sustainability Data Checker Demo</h1>
+      <p class="sub">A tiny quality-check workflow for ESG data. Upload a CSV or paste report text, then review issues and an overall quality score.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card hero">
+      <div class="tabs" role="tablist" aria-label="Modes">
+        <button class="tab active" id="tabCsv" role="tab" aria-selected="true" aria-controls="panelCsv">CSV mode</button>
+        <button class="tab" id="tabText" role="tab" aria-selected="false" aria-controls="panelText">Report text mode</button>
+      </div>
+
+      <div class="panel" id="panelCsv" role="tabpanel" aria-labelledby="tabCsv">
+        <div class="grid">
+          <div>
+            <h2>Upload ESG CSV</h2>
+            <p class="hint">Try the included sample file: <code>sample_esg_data.csv</code></p>
+            <div class="row">
+              <input type="file" id="csvFile" accept=".csv,text/csv"/>
+              <button class="btn" id="loadSample">Load sample</button>
+            </div>
+            <div class="row">
+              <button class="btn primary" id="runChecks">Run checks</button>
+              <button class="btn" id="clearCsv">Clear</button>
+            </div>
+            <details class="help">
+              <summary>CSV expected columns</summary>
+              <pre id="csvSchema"></pre>
+            </details>
+          </div>
+
+          <div>
+            <h2>Quality score</h2>
+            <div class="score">
+              <div class="scoreValue" id="scoreValue">–</div>
+              <div class="scoreLabel" id="scoreLabel">Upload data and run checks</div>
+            </div>
+            <h3>Issues</h3>
+            <div id="issues" class="issues">No issues yet</div>
+          </div>
+        </div>
+
+        <h3>Data preview</h3>
+        <div class="tableWrap">
+          <table id="dataTable">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel hidden" id="panelText" role="tabpanel" aria-labelledby="tabText">
+        <div class="grid">
+          <div>
+            <h2>Paste disclosure text</h2>
+            <p class="hint">Paste a snippet from an annual or sustainability report. The demo tries to extract common metrics and flags missing or conflicting values.</p>
+            <textarea id="reportText" rows="12" placeholder="Paste report text here"></textarea>
+            <div class="row">
+              <button class="btn primary" id="extract">Extract and check</button>
+              <button class="btn" id="loadSampleText">Load sample text</button>
+              <button class="btn" id="clearText">Clear</button>
+            </div>
+          </div>
+          <div>
+            <h2>Extracted metrics</h2>
+            <div class="kv" id="extracted">Nothing extracted yet</div>
+            <h3>Notes</h3>
+            <div id="textIssues" class="issues">No notes yet</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Why this exists</h2>
+      <p>This is a short demo inspired by the CTI role. It focuses on careful validation, edge cases, and clear output that a reviewer can act on quickly.</p>
+      <div class="actions" style="margin-top:14px">
+        <a href="thanks.html" class="btn primary">Next: Why I&#39;m excited about CTI</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
